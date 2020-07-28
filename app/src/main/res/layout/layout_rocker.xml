@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:ignore="MissingConstraints"
+    android:layout_height="match_parent">
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@mipmap/camera_bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.bird.rockerdome.rocker.RockerRelativeLayout
+        android:id="@+id/rrl_throttle_left"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.5">
+
+
+        <com.bird.rockerdome.rocker.RockerView
+            android:id="@+id/rv_throttle_left"
+            android:layout_width="@dimen/rocker_width"
+            android:layout_height="@dimen/rocker_width"
+            android:layout_centerInParent="true"
+            />
+
+
+    </com.bird.rockerdome.rocker.RockerRelativeLayout>
+
+    <com.bird.rockerdome.rocker.RockerRelativeLayout
+
+        android:id="@+id/rrl_throttle_right"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.5">
+        <com.bird.rockerdome.rocker.RockerView
+            android:id="@+id/rv_throttle_right"
+            android:layout_width="@dimen/rocker_width"
+            android:layout_height="@dimen/rocker_width"
+            android:layout_centerInParent="true"
+            />
+</com.bird.rockerdome.rocker.RockerRelativeLayout>
+
+
+    <com.bird.rockerdome.rocker.RockerSafeView
+
+        android:id="@+id/rockerSafeView1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.5" />
+
+    <com.bird.rockerdome.rocker.RockerSafeView
+        android:id="@+id/rockerSafeView2"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.5" />
+
+
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_rocker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="rrl_throttle_right,rrl_throttle_left"
+        />
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_safe_rocker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="rockerSafeView2,rockerSafeView1"
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

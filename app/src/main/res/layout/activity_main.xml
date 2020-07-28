@@ -4,39 +4,77 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:layout_editor_absoluteY="25dp"
-    tools:ignore="MissingConstraints"
-    tools:context=".MainActivity"
-    >
+    tools:ignore="MissingConstraints">
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="可移动摇杆"
-        app:layout_constrainedHeight="false"
-       />
+
+
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="固定摇杆"
+        app:layout_constraintWidth_percent="0.15"
+        app:layout_constraintLeft_toLeftOf="@id/guide_line2"
+        app:layout_constraintTop_toTopOf="@id/guide_line1"
         />
 
-    <RadioButton
-        android:id="@+id/radioButton3"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/button"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="美国手"
+        android:text="可移动摇杆"
+        app:layout_constraintLeft_toRightOf="@id/button2"
+        app:layout_constraintTop_toTopOf="@id/button2"
+        android:layout_marginLeft="100dp"
+        app:layout_constraintWidth_percent="0.15"
         />
 
-    <RadioButton
-        android:id="@+id/radioButton4"
-        android:layout_width="wrap_content"
+
+    <RadioGroup
+        android:id="@+id/radio_group"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="日本手"
-       />
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="@+id/guide_line2"
+        app:layout_constraintTop_toTopOf="@+id/guide_line3">
+
+        <RadioButton
+            android:id="@+id/radioButton3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="美国手" />
+
+        <RadioButton
+            android:id="@+id/radioButton4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:text="日本手" />
+    </RadioGroup>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_line1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.33" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_line2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.3"
+         />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_line3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.66" />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
