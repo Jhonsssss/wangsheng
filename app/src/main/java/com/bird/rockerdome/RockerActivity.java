@@ -56,7 +56,7 @@ public class RockerActivity extends AppCompatActivity {
         //摇杆飞行
         mRockerFly = new RockerFly(rrlThrottleLeft, rrlThrottleRight,
                 rvThrottleLeft, rvThrottleRight);
-        mRockerFly.initRockerFly(true);
+        mRockerFly.initRockerFly();
         group_rocker.setVisibility(View.VISIBLE);
         group_safe_rocker.setVisibility(View.GONE);
     }
