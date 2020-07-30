@@ -9,5 +9,5 @@ public interface RockerViewInterface {
 	 * @param y -1 ~ 1
 	 * @param angle -180 ~ 180
 	 */
-	public void onRockerChanged(View view, float x, float y, float angle);
+	void onRockerChanged(View view, float x, float y, float angle);
 }

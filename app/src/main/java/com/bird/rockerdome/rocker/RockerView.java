@@ -45,9 +45,6 @@ public class RockerView extends View {
     private Bitmap bmpBg = null;
     private Bitmap bmpPoint = null;
     private RockerViewInterface rockerViewInterface = null;
-    private int clickImgX = 0;
-    private int clickImgY = 0;
-    private boolean isDrawClickImg = false;
     private RectF rectF, rectFInner;
     private Path left, top, right, bottom;
     private Region regionLeft, regionTop, regionRight, regionBottom, regionInner;
@@ -171,7 +168,6 @@ public class RockerView extends View {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         int x, y;
-        isDrawClickImg = false;
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             if (mRockerSafeListener != null) {
                 mRockerSafeListener.toggleLeftOrRight(false);
@@ -198,7 +194,6 @@ public class RockerView extends View {
         //当释放按键时摇杆要恢复摇杆的位置为初始位置
         pointCenterX = POINT_CENTER_X;
         pointCenterY = POINT_CENTER_Y;
-        isDrawClickImg = false;
         angle = 0;
     }
 
@@ -209,7 +204,10 @@ public class RockerView extends View {
             //得到摇杆与触屏点所形成的角度
             double radian = getRadian(bgCenterX, bgCenterY, x, y);
             //保证内部小圆运动的长度限制
-            getXY(bgCenterX, bgCenterY, bgR, radian);
+            //获取圆周运动的X坐标
+            pointCenterX = (int) ((bgR * Math.cos(radian)) + bgCenterX);
+            //获取圆周运动的Y坐标
+            pointCenterY = (int) ((bgR * Math.sin(radian)) + bgCenterY);
 
             // 换算成角度值，跟X轴正半轴形成的角度, -180 ~ 180
             angle = (float) (radian * 180 / Math.PI);
@@ -269,18 +267,6 @@ public class RockerView extends View {
         }
     }
 
-    /**
-     * @param R       圆周运动的旋转点
-     * @param centerX 旋转点X
-     * @param centerY 旋转点Y
-     * @param rad     旋转的弧度
-     */
-    public void getXY(float centerX, float centerY, float R, double rad) {
-        //获取圆周运动的X坐标
-        pointCenterX = (int) ((R * Math.cos(rad)) + centerX);
-        //获取圆周运动的Y坐标
-        pointCenterY = (int) ((R * Math.sin(rad)) + centerY);
-    }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
@@ -299,27 +285,27 @@ public class RockerView extends View {
             //画点的位置
             if (null != bmpPoint) {
                 canvas.drawBitmap(bmpPoint, (pointCenterX - pointR), (pointCenterY - pointR), null);
+            }
 
-                //根据点的位置来画摇杆外围光圈
-                matchingRegion(pointCenterX - pointR + bmpPoint.getWidth() / 2, pointCenterY - pointR + bmpPoint.getHeight() / 2);
-                switch (selectedPosition) {
-                    case INNER:
-                        break;
-                    case LEFT:
-                        canvas.drawBitmap(leftLight, 0, (getHeight() - leftLight.getHeight()) / 2, paint);
-                        break;
-                    case TOP:
-                        canvas.drawBitmap(topLight, (getWidth() - topLight.getWidth()) / 2, 0, paint);
-                        break;
-                    case RIGHT:
-                        canvas.drawBitmap(rightLight, getWidth() - rightLight.getWidth(), (getHeight() - rightLight.getHeight()) / 2, paint);
-                        break;
-                    case BOTTOM:
-                        canvas.drawBitmap(bottomLight, (getWidth() - bottomLight.getWidth()) / 2, getWidth() - bottomLight.getHeight(), paint);
-                        break;
-                    default:
-                        break;
-                }
+            //根据点的位置来画摇杆外围光圈
+            matchingRegion(pointCenterX - pointR + bmpPoint.getWidth() / 2, pointCenterY - pointR + bmpPoint.getHeight() / 2);
+            switch (selectedPosition) {
+                case INNER:
+                    break;
+                case LEFT:
+                    canvas.drawBitmap(leftLight, 0, (getHeight() - leftLight.getHeight()) / 2, paint);
+                    break;
+                case TOP:
+                    canvas.drawBitmap(topLight, (getWidth() - topLight.getWidth()) / 2, 0, paint);
+                    break;
+                case RIGHT:
+                    canvas.drawBitmap(rightLight, getWidth() - rightLight.getWidth(), (getHeight() - rightLight.getHeight()) / 2, paint);
+                    break;
+                case BOTTOM:
+                    canvas.drawBitmap(bottomLight, (getWidth() - bottomLight.getWidth()) / 2, getWidth() - bottomLight.getHeight(), paint);
+                    break;
+                default:
+                    break;
             }
 
             if (null != rockerViewInterface) {
@@ -332,7 +318,6 @@ public class RockerView extends View {
                 } else {
                     xVal = (float) (pointCenterX - POINT_CENTER_X) / bgHalfWidth;
                     yVal = (float) (pointCenterY - POINT_CENTER_Y) / bgHalfWidth;
-                    //LogUtil.Lee("RockerView fales  twoX     xVal： " + xVal + " yVal： " + yVal);
                 }
                 rockerViewInterface.onRockerChanged(this, xVal, yVal, angle);
             }
@@ -386,8 +371,7 @@ public class RockerView extends View {
         }
     }
 
-    public void reset() {
-        //当释放按键时摇杆要恢复摇杆的位置为初始位置
+    public void reset() {//当释放按键时摇杆要恢复摇杆的位置为初始位置
         pointCenterX = bgCenterX;
         pointCenterY = bgCenterY;
         angle = 0;

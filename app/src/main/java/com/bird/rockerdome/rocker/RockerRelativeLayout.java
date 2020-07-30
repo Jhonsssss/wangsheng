@@ -38,10 +38,8 @@ public class RockerRelativeLayout extends RelativeLayout {
 
       @SuppressLint("NewApi") public void onGlobalLayout() {
         getViewTreeObserver().removeOnGlobalLayoutListener(this);
-
         viewW = getWidth();
         viewH = getHeight();
-
         int cnt = getChildCount();
         for (int i = 0; i < cnt; i++) {
           View view = getChildAt(i);
@@ -69,32 +67,16 @@ public class RockerRelativeLayout extends RelativeLayout {
             oneX = sv_rocker_one.getX();
             oneY = sv_rocker_one.getY();
           }
-
           if (oneW < 0 || oneH < 0) {
             oneW = sv_rocker_one.getWidth();
             oneH = sv_rocker_one.getHeight();
           }
-
           if (oneW > 0 && oneH > 0) {
             float oneCenterL = (x - oneW / 2);
             float oneCenterT = (y - oneH / 2);
-
-          /*  if (oneCenterL < 0) {
-              oneCenterL = 0;
-            } else*/
-
             if (x > (viewW - oneW / 2)) {
               oneCenterL = (viewW - oneW);
             }
-
-           /* if (oneCenterT < 0) {
-              oneCenterT = 0;
-            } else */
-
-            /*if (y > (viewH - oneH / 2)) {
-              oneCenterT = (viewH - oneH);
-            }*/
-
             sv_rocker_one.setX(oneCenterL);
             sv_rocker_one.setY(oneCenterT);
           }
@@ -113,23 +95,12 @@ public class RockerRelativeLayout extends RelativeLayout {
           }
 
           if (twoW > 0 && twoH > 0) {
-            float twoCenterL = (x - twoW / 2);
+            float twoCenterL = (x - twoW /  2);
             float twoCenterT = (y - twoH / 2);
 
             if (twoCenterL < 0) {
               twoCenterL = 0;
             }
-           /* else if (x > (viewW - twoW / 2)) {
-              twoCenterL = (viewW - twoW);
-            }*/
-
-           /* if (twoCenterT < 0) {
-              twoCenterT = 0;
-            }*/
-           /* else if (y > (viewH - twoH / 2)) {
-              twoCenterT = (viewH - twoH);
-            }*/
-
             sv_rocker_two.setX(twoCenterL);
             sv_rocker_two.setY(twoCenterT);
           }
@@ -138,7 +109,6 @@ public class RockerRelativeLayout extends RelativeLayout {
       case MotionEvent.ACTION_POINTER_UP:
         break;
       case MotionEvent.ACTION_UP:
-        // showController on default position
         goOriginPosition();
         break;
       case MotionEvent.ACTION_CANCEL:
@@ -167,11 +137,9 @@ public class RockerRelativeLayout extends RelativeLayout {
 
   public void resetlayout() {
     goOriginPosition();
-    //invalidate();
   }
 
   private void goOriginPosition() {
-    //LogUtil.Lee("RockerRelativeLayout  oneX " + oneX + " oneY " + oneY+"  twoX " + twoX + " twoY " + twoY);
     if (null != sv_rocker_one && oneX > 0 && oneY > 0) {
       sv_rocker_one.setX(oneX);
       sv_rocker_one.setY(oneY);
