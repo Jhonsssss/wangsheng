@@ -17,7 +17,6 @@ import com.bird.rockerdome.R;
 
 
 /**
- * Created by Administrator on 2017/3/1.
  */
 
 public class RockerSafeView extends View {
@@ -131,7 +130,6 @@ public class RockerSafeView extends View {
         safe_controll_right = BitmapUtil.resizeBitmap(BitmapFactory.decodeResource(resources, R.mipmap.safe_mode_left_controll_right), scaling);
         safe_controll_top = BitmapUtil.resizeBitmap(BitmapFactory.decodeResource(resources, R.mipmap.safe_mode_left_controll_top), scaling);
         safe_controll_bottom = BitmapUtil.resizeBitmap(BitmapFactory.decodeResource(resources, R.mipmap.safe_mode_left_controll_bottom), scaling);
-//        animUtils = new AnimUtils();
     }
 
     @Override

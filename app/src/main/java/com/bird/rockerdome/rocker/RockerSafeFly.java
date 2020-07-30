@@ -3,12 +3,9 @@ package com.bird.rockerdome.rocker;
 
 
 /**
- * Created by Administrator on 2017/3/3.
  */
 
 public class RockerSafeFly {
-    boolean  leftPress=false;
-    boolean  rightPress=false;
     private int rockerMode; //摇杆是什么手  0美国手   1日本手
     private RockerSafeView left,right;
 
@@ -29,7 +26,6 @@ public class RockerSafeFly {
 
             @Override
             public void toggleLeftOrRight(boolean isShow) {
-                leftPress=!isShow;
             }
         });
         right.setOnSensorLinstener(new RockerSafeView.RockerSafeListener() {
@@ -39,7 +35,6 @@ public class RockerSafeFly {
 
             @Override
             public void toggleLeftOrRight(boolean isShow) {
-                rightPress=!isShow;
             }
         });
     }
